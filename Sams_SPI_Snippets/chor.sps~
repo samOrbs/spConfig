@@ -1,0 +1,11 @@
+# key: chor
+# point_line: 0
+# point_index: 11
+# --
+##| bAsIcChOrD
+time_warp [0,0,0] do
+  synth :fm, note:(chord_degree 1,60,:aeolian,3).tick(:bcs0), pan:(r -1,1,-0.1).look(:bcs0)
+end
+
+
+
