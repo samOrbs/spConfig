@@ -1,22 +1,13 @@
 # Sonic Pi init file
 # Code in here will be evaluated on launch.
-# Sonic Pi init file
-# Code in here will be evaluated on launch.
-# some math abrev
-def sq n
-   Math.sqrt n
-end
-
-# defines pi
+load_snippets("C:/Users/samco/.sonic-pi/config/Sams_SPI_Snippets")
 def pi
 pi = 3.14159265359
 end
-# defines Golden Ratio to 3 dp
 def gr
-gr = 1.618
+gr = 1.61803398875
 end
 # function to make 16 step sequencer from golden ratio
-
 def grs
 1.times do
 grss = []
@@ -26,7 +17,6 @@ end
 return grss
 end
 end
-
 # function to make 64 step sequencer from western meter
 def s64
     1.times do
@@ -41,65 +31,6 @@ def s64
         return sixtyFourths
     end
 end
-
-
-def ex64
-  1.times do
-    sixtyExFouths = []
-    oneExfourths =  0.015625
-    lambda = Math.log(1+(1/oneExfourths))
-    lambda = lambda/63
-    sixtyExFouths << oneExfourths
-    64.times do
-      oneExfourths = oneExfourths*(lambda+1)
-      sixtyExFouths << oneExfourths
-    end
-    return sixtyExFouths
-  end
-end
-
-
-def ex32
-  1.times do
-    thirtyExTwos = []
-    oneExTwos =  0.015625
-    lambda = Math.log(1+(1/oneExTwos))
-    lambda = lambda/31
-    thirtyExTwos << oneExTwos
-    32.times do
-      oneExTwos = oneExTwos*(lambda+1)
-      thirtyExTwos << oneExTwos
-    end
-    return thirtyExTwos
-  end
-end
-
-# Wendy Carlos's Microtuning Scales in ratio as array defintions.
-def superJust
-sj = [1.0, 1.0624999999997, 1.1249999999995, 1.1999999999991, 1.2499999999989, 1.3333333333318, 1.3749999999982, 1.4999999999976, 1.6249999999968, 1.6666666666633, 1.7499999999961, 1.8749999999953 ]
-return sj
-end
-
-def alpha
-  alp = [1.0, 1.0460849397923, 1.0942937012603, 1.1447241605981, 1.1974787046181, 1.252664438623, 1.3103934038569, 1.370782804978, 1.4339552480138, 1.5000389892834, 1.5691681957907, 1.6414832176177, 1.7171308728718, 1.7962647457637, 1.8790454984233 ]
-return alp
-end
-
-def beta
-  bet = [1.0, 1.0375397909391, 1.0764888177819, 1.1168999829497, 1.1588281748094, 1.2023303422261, 1.2474655719129, 1.2942951686862, 1.3428827387322, 1.3932942759998, 1.4455982518375, 1.4998657079933, 1.5561703531081, 1.6145886628293, 1.6751999836845, 1.7380866408532, 1.8033340499848, 1.8710308332145, 1.9412689395339 ]
-return bet
-end
-
-def gamma
-  gam = [1.0, 1.0204814798927, 1.0413824508041, 1.0627115045309, 1.0844774088427, 1.1066891110861, 1.1293557418623, 1.152486618781, 1.1760912502902, 1.200179339585, 1.2247607885964, 1.2498457020615, 1.2754443916773, 1.3015673803398, 1.3282254064692, 1.3554294284249, 1.3831906290092, 1.411520420065, 1.4404304471668, 1.4699325944073, 1.5000389892834, 1.5307620076807, 1.5621142789616, 1.5941086911563, 1.6267583962611, 1.6600768156445, 1.6940776455645, 1.7287748627989, 1.7641827303903, 1.80031580351, 1.8371889354401,1.8748172836805,1.9132163161788,1.9524018176891]
-return gam
-end
-
-def harm
-  har =[1.0, 1.0624999999997, 1.1249999999995, 1.1874999999992, 1.2499999999989, 1.3124999999986, 1.3749999999982, 1.4999999999976, 1.6249999999968, 1.6874999999965, 1.7499999999961, 1.8749999999953 ]
-return har
-end
-
 #granular synth check github for supercollider synthDef also snipper 'granular' controls it
 def granular(rt = 1, grainSize = 0.1, pos = 0, posDither = 0.1, trigR = 20, panPos = 0, att = 0.1, sus = 1, rel = 0.1, timeAttack = 0, timeSustain = 0, timeRelease = 0, timeLevelAdd = 0, pitchAttack = 0, pitchSustain = 0, pitchRelease = 0, pitchLevelAdd = 0, amps= 1,buff = 0)
     use_osc("127.0.0.1",8085)
@@ -124,11 +55,7 @@ def granular(rt = 1, grainSize = 0.1, pos = 0, posDither = 0.1, trigR = 20, panP
     pitchLevelAdd = pitchLevelAdd
     osc('/liveo',buff,pos,att,sus,rel,trigR,rt,amps,grainSize,posDither,panPos,timeAttack,timeSustain,timeRelease,timeLevelAdd,pitchAttack,pitchSustain,pitchRelease,pitchLevelAdd)
 end
-# loads snippets
-load_snippets("~/.sonic-pi/config/Sams_SPI_Snippets/")
-# load")
-# load synths
-#load_synthdefs("/Users/sEriOuS/Documents/ZigLib/chronicles/mySynths")
+
 # gives option to abriviate ring to r
 define :r do |*args|
     ring *args
@@ -149,30 +76,6 @@ end
 define :m do |*args|
     midi *args
 end
-
-# pracht
-def pracht(dcRoot = 0.13, mf = 440, mi = 0.1, pA = 0.05, pR = 4, pL = 1, pC = 4, miA = 0, miS = 0, miR = 0, miL = 1, mfA = 0, mfS = 0, mfR = 0, mfL = 1, out)
-  use_osc("127.0.0.1",6969)
-  dcRoot = dcRoot
-  mf = mf
-  mi = mi
-  pA = pA
-  pR = pR
-  pL = pL
-  pC = pC
-  miA = miA
-  miS = miS
-  miR = miR
-  miL = miL
-  mfA = mfA
-  mfS = mfS
-  mfR = mfR
-  mfL = mfL
-  out = out
-  osc('/splendour',dcRoot, mf, mi, pA, pR, pL, pC, miA, miS, miR, miL, mfA, mfS, mfR, mfL, out)
-end
-
-
 
 #drumstation:
 
@@ -482,147 +385,191 @@ def claves(vel = 127, slep = 1, tune = 20,  pan = 60)
     sleep slep
 end
 
-# drumstation lambdas
+def bd(vel = 120, tun = 60, dec = 60, dis = 0)
+  bd = -> (vel1 = vel,tun1 = tun, dec1 = dec, dis1 = dis){
+    bassDrum(
+      vel1, # velo
+      0, # sleep
+      tun1,# tune
+      dec1, # decay
+      60, # pan
+      dis1, # distortion
+      0 # tone
+  )}
+bd.call
+end
 
-bd = -> (vel = 120,tun = 60, dec = 60, dis = 0){
-  bassDrum(
-    vel, # velo
-    0, # sleep
-    tun,# tune
-    dec, # decay
-    60, # pan
-    dis, # distortion
-    0 # tone
-)}
-
-bd9 = -> (vel = 120,tun = 60, att = 0, dec = 60, dis = 0){
+def bd9(vel = 120,tun = 60, att = 0, dec = 60, dis = 0)
+bd9 = -> (vel1 = vel,tun1 = tun, att1 = att, dec1 = dec, dis1 = dis){
   bassDrum909(
-    vel, # velo
+    vel1, # velo
     0, # sleep
-    tun,# tune
-    att, # attak
-    dec, # decay
+    tun1,# tune
+    att1, # attak
+    dec1, # decay
     60, # pan
-    dis # distortion
-)}
+    dis1 # distortion
+  )}
+bd9.call
+end
 
-sn = -> (vel = 120, tun = 60, snap = 60, dis = 0){
+def sn(vel = 120, tun = 60, snap = 60, dis = 0)
+sn = -> (vel1 = vel, tun1 = tun, snap1 = snap, dis1 = dis){
   snareDrum(
-    vel, # velo
+    vel1, # velo
     0, # sleep
-    tun, # tune
-    snap, # snappy
+    tun1, # tune
+    snap1, # snappy
     60, # pan
-    dis, # distortion
+    dis1, # distortion
     60 # tone
-)}
+  )}
+sn.call
+end
 
-sn9 = -> (vel = 120, tun = 60, ton = 0, snap = 60, dis = 0){
+def sn9(vel = 120, tun = 60, ton = 0, snap = 60, dis = 0)
+sn9 = -> (vel1 = vel, tun1 = tun, ton1 = ton, snap1 = snap, dis1 = dis){
   snareDrum909(
-    vel, # velo
+    vel1, # velo
     0, # sleep
-    tun, # tune
-    ton,
-    snap, # snappy
+    tun1, # tune
+    ton1,
+    snap1, # snappy
     60, # pan
-    dis # distortion
-)}
+    dis1 # distortion
+  )}
+sn9.call
+end
 
-cow = -> (vel = 127, tun = 20, dis = 0){
+def cow(vel = 127, tun = 20, dis = 0)
+cow = -> (vel1 = vel, tun1 = tun, dis1 = dis){
   cowBell(
-    vel = vel,
+    vel1,
     slep = 0,
-    tune = tun,
+    tun1,
     pan = 60,
-    distortion = dis
-)}
+    dis1
+  )}
+cow.call
+end
 
-cp = -> (vel = 120, tun = 60){
+def cp (vel = 120, tun = 60)
+cp = -> (vel1 = vel, tun1 = tun){
   handClap(
-    vel, # velo
+    vel1, # velo
     0, # sleep
-    tun, # tune
+    tun1, # tune
     60, # pan
-)}
+  )}
+cp.call
+end
 
-cp9 = -> (vel = 127, tun = 20){
+def cp9(vel = 127, tun = 20)
+cp9 = -> (vel1 = vel, tun1 = tun){
   handClap909(
-    vel = vel,
+    vel1,
     slep = 0,
-    tune = tun,
+    tun1,
     pan = 60
-)}
+  )}
+cp9.call
+end
 
-rim9 = -> (vel = 127, tun = 20){
+def rim9(vel = 127, tun = 20)
+    rim9 = -> (vel1 = vel, tun1 = tun){
   rimShot909(
-    vel = vel,
+    vel1,
     slep = 0,
-    tune = tun,
+    tun1,
     pan = 60
-)}
+  )}
+    rim9.call
+end
 
-rim = -> (vel = 127, tun = 20){
+def rim(vel = 127, tun = 20)
+rim = -> (vel1 = vel, tun1 = tun){
   rimShot(
-    vel = vel,
+    vel1,
     slep = 0,
-    tune = tun,
+    tun1,
     pan = 60
-)}
+  )}
+rim.call
+end
 
-hh = -> (vel = 120, tun = 60, dec = 60){
+def hh(vel = 120, tun = 60, dec = 60)
+hh = -> (vel1 = vel, tun1 = tun, dec1 = dec){
   closedHH(
-    vel, # velo
+    vel1, # velo
     0, # sleep
-    tun, # tune
+    tun1, # tune
     60, # pan
-    dec # decay
+    dec1 # decay
 )}
+hh.call
+end
 
-hh9 = -> (vel = 127, tun = 20, dec = 60, dis = 0){
-  closedHH909(
-    vel = vel,
-    slep = 0,
-    tune = tun,
-    decay = dec,
-    pan = 60,
-    distortion = dis
-)}
+def hh9  (vel = 127, tun = 20, dec = 60, dis = 0)
+  hh9 = -> (vel1 = vel, tun1 = tun, dec1 = dec, dis1 = dis){
+    closedHH909(
+      vel1,
+      slep = 0,
+      tun1,
+      dec1,
+      pan = 60,
+      dis1
+    )}
+  hh9.call
+end
 
-clav = -> (vel = 127, tun = 20){
+def clav (vel = 127, tun = 20)
+clav = -> (vel1 = vel, tun1 = tun){
   claves(
-    vel = vel,
+    vel1,
     slep = 0,
-    tune = tun,
+    tun1,
     pan = 60
-)}
+  )}
+clav.call
+end
 
-lcong = -> (vel = 127, tun = 20, dis = 0){
+def lcong (vel = 127, tun = 20, dis = 0)
+lcong = -> (vel1 = vel, tun1 = tun, dis1 = dis){
   lowConga(
-    vel = vel,
+    vel1,
     slep = 0,
-    tune = tun,
+    tun1,
     pan = 60,
-    distortion = dis
-)}
+    dis1
+  )}
+lcong.call
+end
 
-mcong = -> (vel = 127, tun = 20, dis = 0){
+def mcong (vel = 127, tun = 20, dis = 0)
+mcong = -> (vel1 = vel, tun1 = tun, dis1 = dis){
   midConga(
-    vel = vel,
+    vel1,
     slep = 0,
-    tune = tun,
+    tun1,
     pan = 60,
-    distortion = dis
-)}
+    dis1
+  )}
+mcong.call
+end
 
-hcong = -> (vel = 127, tun = 20, dis = 0){
+def hcong (vel = 127, tun = 20, dis = 0)
+hcong = -> (vel1 = vel, tun1 = tun, dis1 = dis){
   highConga(
-    vel = vel,
+    vel1,
     slep = 0,
-    tune = tun,
+    tun1,
     pan = 60,
-    distortion = dis
-)}
-# lambda end
+    dis1
+  )}
+hcong.call
+end
+
+
 
 # a way to turn all scales into an array called scales
 define :scales do | selector = 0 |
@@ -701,75 +648,4 @@ zt3 =:blues_major # 71
 zu3 =:blues_minor # 72
 scalez =[za,zb,zc,zd,ze,zf,zg,zh,zi,zj,zk,zl,zm,zn,zo,zp,zq,zr,zs,zt,zu,zv,zw,zx,zy,zz,za2,zb2,zc2,zd2,ze2,zf2,zg2,zh2,zi2,zj2,zk2,zl2,zm2,zn2,zo2,zp2,zq2,zr2,zs2,zt2,zu2,zv2,zw2,zx2,zy2,zz2,za3,zb3,zc3,zd3,ze3,zf3,zg3,zh3,zi3,zj3,zk3,zl3,zm3,zn3,zo3,zp3,zq3,zr3,zs3,zt3,zu3]
 scales = scalez[selector]
-end
-
-define :chords do |selector = 0|
-
-zac ='1' # 0
-zbc ='5' # 1
-zcc ='+5' # 2
-zdc ='m+5' # 3
-zec =:sus2 # 4
-zfc =:sus4 # 5
-zgc ='6' # 6
-zhc =:m6 # 7
-zic ='7sus2' # 8
-zjc ='7sus4' # 9
-zkc ='7-5' # 10
-zlc ='m7-5' # 11
-zmc ='7+5' # 12
-znc ='m7+5' # 13
-zoc ='9' # 14
-zpc =:m9 # 15
-zqc ='m7+9' # 16
-zrc =:maj9 # 17
-zsc ='9sus4' # 18
-ztc ='6*9' # 19
-zuc ='m6*9' # 20
-zvc ='7-9' # 21
-zwc ='m7-9' # 22
-zxc ='7-10' # 23
-zyc ='9+5' # 24
-zzc ='m9+5' # 25
-zac2 ='7+5-9' # 26
-zbc2 ='m7+5-9' # 27
-zcc2 ='11' # 28
-zdc2 =:m11 # 29
-zec2 =:maj11 # 30
-zfc2 ='11+' # 31
-zgc2 ='m11+' # 32
-zhc2 ='13' # 33
-zic2 =:m13 # 34
-zjc2 =:add2 # 35
-zkc2 =:add4 # 36
-zlc2 =:add9 # 37
-zmc2 =:add11 # 38
-znc2 =:add13 # 39
-zoc2 =:madd2 # 40
-zpc2 =:madd4 # 41
-zqc2 =:madd9 # 42
-zrc2 =:madd11 # 43
-zsc2 =:madd13 # 44
-ztc2 =:major # 45
-zuc2 =:M # 46
-zvc2 =:minor # 47
-zwc2 =:m # 48
-zxc2 =:major7 # 49
-zyc2 =:dom7 # 50
-zzc2 ='7' #51
-zac3 =:M7 #52
-zbc3 =:minor7 # 53
-zcc3 =:m7 # 54
-zdc3 =:augmented # 55
-zec3 =:a # 56
-zfc3 =:diminished # 57
-zgc3 =:dim # 58
-zhc3 =:i # 59
-zic3 =:diminished7 # 60
-zjc3 =:dim7 # 61
-zkc3 =:i7 # 62
-
-chordz =[zac,zbc,zcc,zdc,zec,zfc,zgc,zhc,zic,zjc,zkc,zlc,zmc,znc,zoc,zpc,zqc,zrc,zsc,ztc,zuc,zvc,zwc,zxc,zyc,zzc,zac2,zbc2,zcc2,zdc2,zec2,zfc2,zgc2,zhc2,zic2,zjc2,zkc2,zlc2,zmc2,znc2,zoc2,zpc2,zqc2,zrc2,zsc2,ztc2,zuc2,zvc2,zwc2,zxc2,zyc2,zzc2,zac3,zbc3,zcc3,zdc3,zec3,zfc3,zgc3,zhc3,zic3,zjc3,zkc3]
-chords = chordz[selector]
-
 end
